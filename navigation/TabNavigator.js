@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet, Text, View, TouchableOpacity} from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
+
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -84,8 +85,11 @@ function CustomTabBar({ state, descriptors, navigation }) {
           });
 
           if (!isFocused && !event.defaultPrevented) {
-            // The `merge: true` option makes sure that the params inside the tab screen are preserved
-            navigation.navigate({ name: route.name, merge: true });
+						//TO DO get the drawer state for close if change tab,
+						// navigation.dispatch(DrawerActions.closeDrawer())
+						// The `merge: true` option makes sure that the params inside the tab screen are preserved
+						navigation.navigate({ name: route.name, merge: true });
+						
           }
         };
 
@@ -115,7 +119,7 @@ const BottomTabNavigator = () => {
 			<Tab.Navigator
 				tabBar={(props) => <CustomTabBar {...props} />}
 				initialRouteName="Home"
-				screenOptions={{ headerShown:false,	}}
+				screenOptions={{ headerShown:false}}
 			>
 			<Tab.Screen name="Home" component={HomeDrawerNavigator} />
 			<Tab.Screen name="Playlist" component={PlaylistStackNavigator} />
