@@ -7,7 +7,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/Feather';
 
-import SearchStackNavigator from "./SearchStackNavigation";
+import SearchStackNavigator from "./SearchStackNavigator";
 import SettingsStackNavigator from "./SettingsStackNavigator";
 import HomeDrawerNavigator from "./HomeDrawerNavigator";
 import PlaylistStackNavigator from "./PlaylistStackNavigator";
@@ -94,7 +94,12 @@ function CustomTabBar({ state, descriptors, navigation }) {
         };
 
         return (
-          <TouchableOpacity onPress={onPress} style={styles.centeredItems} key={index}>
+          <TouchableOpacity
+						accessibilityRole="button"
+            accessibilityState={isFocused ? { selected: true } : {}}
+            accessibilityLabel={options.tabBarAccessibilityLabel}
+						onPress={onPress} 
+						style={styles.centeredItems} key={index}>
 						<View
 							style={[styles.centeredItems, styles.itemsNavBar,]}>
 							<View style={{ marginRight: isFocused ? 10: 0,}}>
@@ -118,8 +123,10 @@ const BottomTabNavigator = () => {
 		<SafeAreaProvider>
 			<Tab.Navigator
 				tabBar={(props) => <CustomTabBar {...props} />}
-				initialRouteName="Home"
-				screenOptions={{ headerShown:false}}
+				initialRouteName="Search" // change to home
+				screenOptions={{
+					headerShown:false,
+					tabBarHideOnKeyboard: true			}}
 			>
 			<Tab.Screen name="Home" component={HomeDrawerNavigator} />
 			<Tab.Screen name="Playlist" component={PlaylistStackNavigator} />
@@ -143,6 +150,8 @@ const styles = StyleSheet.create({
 		backgroundColor: 'black',
 		height: 70,
 		padding: 10,
+		borderTopWidth: 0.2,
+		borderTopColor: '#525252',
 	},
 	itemsNavBar : {
 		display: 'flex',

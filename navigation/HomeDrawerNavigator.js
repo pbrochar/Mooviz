@@ -9,6 +9,8 @@ import { TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/Feather';
 import {DrawerActions} from '@react-navigation/native';
 import headerStyles from "./headerStyle";
+
+
 const Drawer = createDrawerNavigator();
 const windowWidth = Dimensions.get('window').width
 
